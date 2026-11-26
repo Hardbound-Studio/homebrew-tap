@@ -12,3 +12,4 @@ Each cask downloads the same signed, notarised build offered on the app's websit
 |---|---|---|
 | Dictiq | `dictiq` | https://dictiq.app |
 | LeaseRail | `leaserail` | https://leaserail.app |
+| Sortbook | `sortbook` | https://sortbook.app |
