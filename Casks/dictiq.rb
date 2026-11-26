@@ -1,6 +1,6 @@
 cask "dictiq" do
-  version "0.1.0"
-  sha256 "df8277c101ec1f80ca0d328f10d416f298bc2fe65510d0e1da77e25a6a33e61f"
+  version "0.5.0"
+  sha256 "59b3db3934e2050ef24fd9ee68ce7c3139c6575c91572b7be7468ea1f0de1761"
 
   url "https://hardboundstudio.com/downloads/dictiq/Dictiq-#{version}-macOS.zip"
   name "Dictiq"
