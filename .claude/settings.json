@@ -1,0 +1,215 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 15,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "block-journal-read.py"
+            ]
+          },
+          {
+            "type": "command",
+            "timeout": 15,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "block-duplicate-read.py"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 45,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "delegate-fat-read.py"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 15,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "block-dead-zone.py"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion|SendMessage|Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 10,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "on-action-rules.py"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 15,
+            "onFailure": "block",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "block-write-outside-roots.py"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell|Monitor|mcp__plugin_desktop-commander_desktop-commander__start_process|mcp__plugin_desktop-commander_desktop-commander__interact_with_process",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 20,
+            "onFailure": "block",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "block-cloud-from-estate.py"
+            ]
+          },
+          {
+            "type": "command",
+            "timeout": 10,
+            "onFailure": "block",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "block-shell-write.py"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep|Glob|WebFetch|WebSearch|Agent|Task|NotebookRead|ToolSearch|SendMessage|Workflow|Skill|Bash|PowerShell|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 15,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "session-budget.py"
+            ]
+          }
+        ]
+      },
+      {
+        "matcher": "Artifact",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 5,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "artifact-watch.py"
+            ]
+          },
+          {
+            "type": "command",
+            "timeout": 15,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "allow-private-republish.py"
+            ]
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 30,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "session-budget.py"
+            ]
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 20,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "session-start-staleness.py"
+            ]
+          },
+          {
+            "type": "command",
+            "timeout": 20,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "session-start-agenda.py"
+            ]
+          },
+          {
+            "type": "command",
+            "timeout": 25,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "session-start-memory-sweep.py"
+            ]
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Artifact",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 5,
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-if-present.py",
+              "artifact-watch.py"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_DISABLE_ARTIFACT": "1"
+  }
+}
