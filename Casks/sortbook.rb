@@ -1,6 +1,6 @@
 cask "sortbook" do
-  version "1.0.7"
-  sha256 "fedd43141bdb8b8ea05784102af59bdca7eb1fcb42b9375e5fb69a4e0956cd2e"
+  version "1.0.8"
+  sha256 "82e0d1a4b23e4d113b2946b22bc7c4af5590d6b6c4001ff217f32d67c5219f3b"
 
   url "https://sortbook.app/download/Sortbook_#{version}_aarch64.dmg"
   name "Sortbook"
